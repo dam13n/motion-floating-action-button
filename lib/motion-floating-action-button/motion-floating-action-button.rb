@@ -4,15 +4,12 @@ module MotionFloatingActionButton
 
   def build(args)
 
-    @float_frame = args[:float_frame] || CGRectMake(0, 0, device.width, device.height)
-    # @normal = args[:normal] 
+    puts args
+    $args = args
+    @floating_frame = args[:floating_frame] || CGRectMake(device.width*3/4, device.height/2, device.width*1/4, device.height/2)
 
-    addButton = VCFloatingActionButton.alloc.initWithFrame(@float_frame, normalImage: UIImage.imageNamed('icon-29'), andPressedImage: UIImage.imageNamed('icon-29'), withScrollview: UITableView.new)
-
-    # addButton = [[VCFloatingActionButton alloc]initWithFrame:floatFrame normalImage:[UIImage imageNamed:@"plus"] andPressedImage:[UIImage imageNamed:@"cross"] withScrollview:_dummyTable];
-
+    addButton = VCFloatingActionButton.alloc.initWithFrame(@floating_frame, normalImage: UIImage.imageNamed('icon-29'), andPressedImage: UIImage.imageNamed('icon-29'), withScrollview: UITableView.new)
 
     addButton
-
   end
 end

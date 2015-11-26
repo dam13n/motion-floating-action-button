@@ -8,8 +8,8 @@ Gem::Specification.new do |s|
   s.email				= "dameyawn@gmail.com"
   s.homepage		= "http://github.com/dam13n/motion-floating-action-button"
 
-  s.require_paths = ["lib", "vendor"]
+  s.require_paths = ["lib", "vendor", "resources"]
   # s.files         = `git ls-files`.split($\)
-  s.files         = Dir["lib/**/*"] + Dir["vendor/**/*"] + ["README.md"]
+  s.files         = Dir["lib/**/*"] + Dir["vendor/**/*"] + Dir["resources/**/*"] + ["README.md"]
   s.license     = 'MIT'
 end
