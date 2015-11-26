@@ -8,6 +8,7 @@ This is a wrapper around gizmoboy7's VCFloatingActionButton written in obj-c. He
 
 
 __setup needed for storyboard file usage__
+
 You need to move the .xib file `resources` into your app's `resources` folder. RubyMotion will compile this into a .nib file, and all should be well. If you know how to avoid having to do this step, please let us know!!!
 
 __create a floating action button view__
