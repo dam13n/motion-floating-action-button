@@ -15,6 +15,8 @@ __create a floating action button view__
 ``` ruby
 @addButton = MotionFloatingActionButton.build({
   floating_frame: CGRectMake(device.width*3/4, device.height/2, device.width*1/4, device.height/2),
+  normal_image: rmq.image.resource('icons/plus'), # or UIImage.imageNamed('plus')
+  pressed_image: rmq.image.resource('icons/plus-pressed'), # or UIImage.imageNamed('plus-pressed')
   delegate: self # Needed if you want to call method of a class with your button
 })  
 
