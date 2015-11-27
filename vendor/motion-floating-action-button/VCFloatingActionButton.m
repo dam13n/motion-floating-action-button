@@ -229,7 +229,7 @@ CGFloat buttonToScreenHeight;
 -(void) showMenu:(id)sender
 {
     
-    self.pressedImageView.transform = CGAffineTransformMakeRotation(-M_PI/4);
+    self.pressedImageView.transform = CGAffineTransformMakeRotation(0);
     self.pressedImageView.alpha = 0.0; //0.3
     [UIView animateWithDuration:animationTime/2 animations:^
      {
@@ -240,7 +240,7 @@ CGFloat buttonToScreenHeight;
          self.normalImageView.alpha = 0.0; //0.7
 
          
-         self.pressedImageView.transform = CGAffineTransformIdentity;
+         self.pressedImageView.transform = CGAffineTransformMakeRotation(M_PI/4); //CGAffineTransformIdentity;
          self.pressedImageView.alpha = 1;
          noOfRows = _labelArray.count;
          [_menuTable reloadData];
@@ -259,7 +259,7 @@ CGFloat buttonToScreenHeight;
      {
          self.bgView.alpha = 0;
          self.pressedImageView.alpha = 0.f;
-         self.pressedImageView.transform = CGAffineTransformMakeRotation(-M_PI/4);
+         self.pressedImageView.transform = CGAffineTransformMakeRotation(M_PI/4);
          self.normalImageView.transform = CGAffineTransformMakeRotation(0);
          self.normalImageView.alpha = 1.f;
      } completion:^(BOOL finished)
