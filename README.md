@@ -4,8 +4,9 @@ Motion-Swipe for RubyMotion
 
 Trying to add a Google inbox like floating button gem for RubyMotion. PRs for fixes, refactors and features accepted!
 
-This is a wrapper around gizmoboy7's VCFloatingActionButton written in obj-c. He does an excellent job detailing how it all works, so that you can customize it easily. So see his source: https://github.com/gizmoboy7/VCFloatingActionButton
+This is a wrapper around gizmoboy7's VCFloatingActionButton written in obj-c. We've included some of the fixes in the issues and pull requests from his repo and have made some customizations here too, so it is diverged and will likely stay that way. See his source: https://github.com/gizmoboy7/VCFloatingActionButton
 
+We'd like to dedicate this gem to @andrewhavens, may he eschew iOS guidelines in the future.
 
 __setup needed for storyboard file usage__
 
