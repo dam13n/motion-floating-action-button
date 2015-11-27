@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 Gem::Specification.new do |s|
   s.name        = "motion-floating-action-button"
-  s.version     = '0.0.3'
+  s.version     = '0.0.4'
   s.summary     = "Cool material design (based on Google's design) floating action button feature for RubyMotion iOS"
   s.description = "Easily create a floating action button interface."
   s.authors     = ["Damien Sutevski", "Siyuan Liu"]
