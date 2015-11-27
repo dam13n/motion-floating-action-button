@@ -26,6 +26,7 @@ scroll_view = UITableView.new  # haven't played with the scroll view option myse
       pressed_image: rmq.image.resource('icons/plus'),
       scroll_view: scroll_view, #optional
       navigation_bar: nav_bar, #optional
+      delegate: self
     )
 
 # Older way but should still work
@@ -33,7 +34,7 @@ scroll_view = UITableView.new  # haven't played with the scroll view option myse
   floating_frame: CGRectMake(device.width*3/4, device.height/2, device.width*1/4, device.height/2),
   normal_image: rmq.image.resource('icons/plus'), # or UIImage.imageNamed('plus')
   pressed_image: rmq.image.resource('icons/plus-pressed'), # or UIImage.imageNamed('plus-pressed')
-  delegate: self # Needed if you want to call method of a class with your button
+  delegate: self
 })  
 
 @addButton.imageArray =  ["Facebook", "Twitter", "Google Plus", "Linked in"]
@@ -41,3 +42,11 @@ scroll_view = UITableView.new  # haven't played with the scroll view option myse
 
 rmq.append(@addButton)
 ```    
+
+__do something after a menu item is pressed__
+
+``` ruby
+def didSelectMenuOptionAtIndex(index)
+  puts index
+end
+```
