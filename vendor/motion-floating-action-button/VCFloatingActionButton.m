@@ -26,7 +26,9 @@ CGFloat buttonToScreenHeight;
 
 @synthesize bgScroller;
 
--(id)initWithFrame:(CGRect)frame normalImage:(UIImage*)passiveImage andPressedImage:(UIImage*)activeImage withScrollview:(UIScrollView*)scrView
+-(id)initWithFrame:(CGRect)frame
+        normalImage:(UIImage*)passiveImage
+        andPressedImage:(UIImage*)activeImage
 {
     self = [super initWithFrame:frame];
     if (self)
@@ -42,7 +44,6 @@ CGFloat buttonToScreenHeight;
         _menuTable = [[UITableView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/4, 0, 0.75*SCREEN_WIDTH,SCREEN_HEIGHT - (SCREEN_HEIGHT - CGRectGetMaxY(self.frame)) )];
         _menuTable.scrollEnabled = NO;
         
-        
         _menuTable.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH/2, CGRectGetHeight(frame))];
         
         _menuTable.delegate = self;
@@ -51,18 +52,81 @@ CGFloat buttonToScreenHeight;
         _menuTable.backgroundColor = [UIColor clearColor];
         _menuTable.transform = CGAffineTransformMakeRotation(-M_PI); //Rotate the table
         
-        previousOffset = scrView.contentOffset.y;
-        
-        bgScroller = scrView;
+        // previousOffset = scrView.contentOffset.y;
+        previousOffset = 0;
+        bgScroller = nil;
 
         _pressedImage = activeImage;
         _normalImage = passiveImage;
         [self setupButton];
+
+        self.blurEffectStyle = UIBlurEffectStyleDark;
+        self.backgroundAlpha = 0.8;
         
     }
     return self;
 }
 
+-(id)initWithFrame:(CGRect)frame
+       normalImage:(UIImage*)passiveImage
+   andPressedImage:(UIImage*)activeImage
+    andNavigationBar:(UINavigationBar*)navBar
+{
+    self = [self initWithFrame:frame
+                   normalImage:passiveImage
+               andPressedImage:activeImage];
+    if(navBar) {
+      int statusBar = [UIApplication sharedApplication].statusBarFrame.size.height;
+
+      _buttonView.frame = CGRectMake(frame.origin.x,
+                                     frame.origin.y + navBar.frame.size.height + statusBar,
+                                     frame.size.width,
+                                     frame.size.height);
+
+      _menuTable.frame = CGRectMake(SCREEN_WIDTH/4,
+                                    0,
+                                    0.75*SCREEN_WIDTH,
+                                    SCREEN_HEIGHT - (SCREEN_HEIGHT - CGRectGetMaxY(self.frame) - navBar.frame.size.height - statusBar));
+    }
+    return self;
+}
+
+-(id)initWithFrame:(CGRect)frame
+       normalImage:(UIImage*)passiveImage
+   andPressedImage:(UIImage*)activeImage
+    withScrollview:(UIScrollView*)scrView
+{
+    self = [self initWithFrame:frame
+                   normalImage:passiveImage
+               andPressedImage:activeImage];
+    if (self)
+    {
+        previousOffset = scrView.contentOffset.y;
+        
+        bgScroller = scrView;
+    }
+    return self;
+}
+
+-(id)initWithFrame:(CGRect)frame
+       normalImage:(UIImage*)passiveImage
+   andPressedImage:(UIImage*)activeImage
+    withScrollview:(UIScrollView*)scrView
+  andNavigationBar:(UINavigationBar*)navBar
+{
+    self = [self initWithFrame:frame
+                   normalImage:passiveImage
+               andPressedImage:activeImage
+              andNavigationBar:navBar];
+    if (self)
+    {
+        previousOffset = scrView.contentOffset.y;
+        
+        bgScroller = scrView;
+    }
+    return self;
+}
+        
 
 -(void)setHideWhileScrolling:(BOOL)hideWhileScrolling
 {
@@ -91,7 +155,8 @@ CGFloat buttonToScreenHeight;
     [_buttonView addGestureRecognizer:buttonTap3];
     
     
-    UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
+    // UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
+    UIBlurEffect *blur = [UIBlurEffect effectWithStyle:self.blurEffectStyle];
     UIVisualEffectView *vsview = [[UIVisualEffectView alloc]initWithEffect:blur];
     
 
@@ -164,14 +229,14 @@ CGFloat buttonToScreenHeight;
 -(void) showMenu:(id)sender
 {
     
-    self.pressedImageView.transform = CGAffineTransformMakeRotation(M_PI);
+    self.pressedImageView.transform = CGAffineTransformMakeRotation(-M_PI/4);
     self.pressedImageView.alpha = 0.0; //0.3
     [UIView animateWithDuration:animationTime/2 animations:^
      {
          self.bgView.alpha = 1;
          
         
-         self.normalImageView.transform = CGAffineTransformMakeRotation(-M_PI);
+         self.normalImageView.transform = CGAffineTransformMakeRotation(M_PI/4);
          self.normalImageView.alpha = 0.0; //0.7
 
          
@@ -194,7 +259,7 @@ CGFloat buttonToScreenHeight;
      {
          self.bgView.alpha = 0;
          self.pressedImageView.alpha = 0.f;
-         self.pressedImageView.transform = CGAffineTransformMakeRotation(-M_PI);
+         self.pressedImageView.transform = CGAffineTransformMakeRotation(-M_PI/4);
          self.normalImageView.transform = CGAffineTransformMakeRotation(0);
          self.normalImageView.alpha = 1.f;
      } completion:^(BOOL finished)
@@ -350,6 +415,8 @@ CGFloat buttonToScreenHeight;
     
     cell.imgView.image = [UIImage imageNamed:[_imageArray objectAtIndex:indexPath.row]];
     cell.title.text    = [_labelArray objectAtIndex:indexPath.row];
+
+    cell.title.textColor = self.menuTextColor;
 
     
     return cell;
