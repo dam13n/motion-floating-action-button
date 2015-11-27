@@ -13,6 +13,21 @@ You need to move the .xib file `resources` into your app's `resources` folder. R
 
 __create a floating action button view__
 ``` ruby
+
+# If you are not using a nav bar, you can ignore these values.
+nav_bar_height = self.navigation_controller.navigationBar.frame.size.height
+nav_bar = self.navigation_controller.navigationBar
+scroll_view = UITableView.new  # haven't played with the scroll view option myself
+    
+@addButton = MotionFloatingActionButton.new(
+      CGRectMake(device.width*3/4, device.height/2+nav_bar_height, device.width*1/4, device.height/2),
+      normal_image: rmq.image.resource('icons/plus'),
+      pressed_image: rmq.image.resource('icons/plus'),
+      scroll_view: scroll_view, #optional
+      navigation_bar: nav_bar, #optional
+    )
+
+# Older way but should still work
 @addButton = MotionFloatingActionButton.build({
   floating_frame: CGRectMake(device.width*3/4, device.height/2, device.width*1/4, device.height/2),
   normal_image: rmq.image.resource('icons/plus'), # or UIImage.imageNamed('plus')
