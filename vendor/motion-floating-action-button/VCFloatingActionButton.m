@@ -83,10 +83,14 @@ CGFloat buttonToScreenHeight;
                                      frame.size.width,
                                      frame.size.height);
 
+
+
       _menuTable.frame = CGRectMake(SCREEN_WIDTH/4,
                                     0,
                                     0.75*SCREEN_WIDTH,
-                                    SCREEN_HEIGHT - (SCREEN_HEIGHT - CGRectGetMaxY(self.frame) - navBar.frame.size.height - statusBar));
+                                    SCREEN_HEIGHT - navBar.frame.size.height);// (SCREEN_HEIGHT - CGRectGetMaxY(self.frame) // - statusBar));
+
+      _menuTable.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH/2, SCREEN_WIDTH/4)]; //CGRectGetHeight(frame))];
     }
     return self;
 }
@@ -411,9 +415,15 @@ CGFloat buttonToScreenHeight;
 //    NSLog(@"%@",[_menuItemSet allValues]);
     
 //    cell.imgView.image = [UIImage imageNamed:[[_menuItemSet allKeys]objectAtIndex:indexPath.row]];
-//        cell.title.text = [[_menuItemSet allValues]objectAtIndex:indexPath.row];
+//    cell.title.text = [[_menuItemSet allValues]objectAtIndex:indexPath.row];
+
+    if ([[_imageArray objectAtIndex:indexPath.row] isKindOfClass:[UIImage class]]) {
+      cell.imgView.image = [_imageArray objectAtIndex:indexPath.row];
+
+    } else if ([[_imageArray objectAtIndex:indexPath.row] isKindOfClass:[NSString class]]) {
+      cell.imgView.image = [UIImage imageNamed:[_imageArray objectAtIndex:indexPath.row]];
+    }
     
-    cell.imgView.image = [UIImage imageNamed:[_imageArray objectAtIndex:indexPath.row]];
     cell.title.text    = [_labelArray objectAtIndex:indexPath.row];
 
     cell.title.textColor = self.menuTextColor;
